@@ -1,10 +1,69 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Entrega Urgente</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <p>Serviço de simulação de frete G-Cargo</p>
+
+  <ion-searchbar
+    placeholder="CEP"
+    [(ngModel)]="cep"
+    (ionInput)="onInputCEP($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+  <p>ou</p>
+
+  <ion-searchbar
+    placeholder="Endereço"
+    [(ngModel)]="endereco"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+  <ion-list *ngIf="showList">
+    <ion-item *ngFor="let item of items">
+        <button class="button button-clear button-assertive" (click)="selectAddress(item)">
+            {{ item.logradouro }}
+        </button>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+  <ion-item>
+      <ion-label>Label: </ion-label>
+      <ion-input required type="text" placeholder="Número"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div *ngIf="selectedAddress">
+      <ion-item>
+          <ion-label>{{selectedAddress.logradouro}}</ion-label>
+          <ion-input required type="text" placeholder="Número"></ion-input>
+        </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>{{selectedAddress.logradouro}}</ion-label>
+            <ion-input required type="text" placeholder="Número"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <h2>{{selectedAddress.bairro}}</h2>
+          <h2>{{selectedAddress.localidade}} - {{selectedAddress.uf}}</h2>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+    
 </ion-content>
